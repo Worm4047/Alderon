@@ -9,13 +9,13 @@ import sentence
 
 def genParagraph():
     """generate paragraph"""
-    num_sentences = random.randrange(20, 30)
-    sentences = [" ".join(sentence.Sentence()) + "." for i in range(num_sentences)]
+    num_sentences = random.randrange(10, 30)
+    sentences = [(" ".join(sentence.Sentence())).capitalize() + "." for i in range(num_sentences)]
     return "<p>{0}</p>".format(" ".join(sentences))
 
 def genChapter():
     """generate chapter"""
-    num_paragraphs = random.randrange(30, 50)
+    num_paragraphs = random.randrange(20, 50)
     paragraphs = [genParagraph() for i in range(num_paragraphs)]
     return "\n".join(paragraphs)
 
@@ -24,10 +24,10 @@ def Book(booklen):
     real_length = 0
     output_file = open("Alderon.html", "w")
     text = ""
-    text += "<html><body style='font-size: 14pt; font-style:-apple-system,BlinkMacSystemFont,Roboto,Helvetica,Arial,sans-serif'>"
+    text += "<html><body style='font-size: 12pt; font-style:-apple-system,BlinkMacSystemFont,Roboto,Helvetica,Arial,sans-serif'>"
     while real_length <= booklen:
         chapter = genChapter()
-        text += "<p>"+chapter.title()+"</p>\n"
+        text += "<p>"+chapter+"</p>\n"
         real_length += len(chapter.split(" "))
     text += "</body></html>"
     output_file.write(text)
@@ -36,5 +36,5 @@ def Book(booklen):
 
 if __name__ == '__main__':
     random.seed(1234567890)
-    Book(100)
+    Book(40000)
     
